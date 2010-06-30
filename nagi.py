@@ -1,0 +1,34 @@
+import os
+from os.path import join, getsize
+import sys
+
+import bencode
+
+directory = sys.argv[1]
+torrent = sys.argv[2]
+
+info = bencode.bread(torrent)['info']
+
+expected_files = {}
+
+if info.has_key('length'):
+	expected_files[total_size] = info['name']
+else:
+	for file in info['files']:
+		expected_files[file['length']] = join(directory, *file['path'])
+
+for dirpath, dirnames, filenames in os.walk(directory):
+	for file in filenames:
+		filename = join(dirpath, file)
+		filesize = getsize(filename)
+		if expected_files.has_key(filesize):
+			if expected_files[filesize] != filename:
+				os.renames(filename, expected_files[filesize])
+				print "Renamed %s to %s" % (filename, expected_files[filesize])
+				del expected_files[filesize]
+		else:
+			print "The file %s doesn't appear to be listed in the .torrent, fyi." % filename
+
+print
+print "These are the files in the .torrent that weren't in your directory:"
+print '\n'.join(sorted(expected_files.values()))
