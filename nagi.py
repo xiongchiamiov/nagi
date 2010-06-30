@@ -12,7 +12,7 @@ info = bencode.bread(torrent)['info']
 expected_files = {}
 
 if info.has_key('length'):
-	expected_files[total_size] = info['name']
+	expected_files['total_size'] = info['name']
 else:
 	for file in info['files']:
 		expected_files[file['length']] = join(directory, *file['path'])
