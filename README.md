@@ -18,5 +18,8 @@ versions of Python, either, so don't expect much.
 
 I think it likely I'll make a super-simple gui for it, but the cli will remain.
 
+Name unrelated: [Nagi] is a character from Hayate no Gotoku.
+
 
 [pyroscope]: http://code.google.com/p/pyroscope/
+[Nagi]: http://myanimelist.net/character/2078/Nagi_Sanzenin
