@@ -1,3 +1,4 @@
 distribute==0.6.34
+docopt==0.6.1
 pypandoc==0.5.3
 wsgiref==0.1.2
